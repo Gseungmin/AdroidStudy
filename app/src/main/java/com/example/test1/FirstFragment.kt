@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class FirstFragment : Fragment() {
 
@@ -21,11 +24,24 @@ class FirstFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_first, container, false)
 
-        view.findViewById<Button>(R.id.btn2).setOnClickListener {
+        val items = mutableListOf<String>()
+        items.add("노래1-1")
+        items.add("노래1-2")
+        items.add("노래1-3")
+
+        val rv = view.findViewById<RecyclerView>(R.id.rv)
+        val rvAdapter = RVAdapter(items)
+
+        //어댑터 연결
+        rv.adapter = rvAdapter
+        rv.layoutManager = LinearLayoutManager(context)
+
+
+        view.findViewById<ImageView>(R.id.btn2).setOnClickListener {
             it.findNavController().navigate(R.id.action_firstFragment_to_secondFragment)
         }
 
-        view.findViewById<Button>(R.id.btn3).setOnClickListener {
+        view.findViewById<ImageView>(R.id.btn3).setOnClickListener {
             it.findNavController().navigate(R.id.action_firstFragment_to_thirdFragment)
         }
         return view
